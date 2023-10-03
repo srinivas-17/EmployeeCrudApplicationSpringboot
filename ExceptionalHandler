@@ -1,0 +1,30 @@
+package com.table.java.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.table.java.exceptions.CustomException;
+import com.table.java.exceptions.EmployeeNotFound;
+
+@ControllerAdvice
+public class ExceptionHandlerController {
+
+	@ExceptionHandler(CustomException.class)
+	@ResponseBody
+	public ResponseEntity<String> HandleNotFoundException(CustomException e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+	}
+
+	@ExceptionHandler(EmployeeNotFound.class)
+	@ResponseBody
+	public ResponseEntity<String> EmployeeNotFound(EmployeeNotFound emp) {
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(emp.getMessage());
+
+	}
+
+}
