@@ -1,0 +1,162 @@
+package Model;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+public class Main {
+
+	public static void main(String[] args) {
+		
+		
+		QuizApplication app=new QuizApplication();
+		app.quizLogic();
+	}
+}
+class QuizApplication{
+	
+	Scanner sc=new Scanner(System.in);
+	int correctAnswers=0,wrongAnswer=0;
+	public void quizLogic() {
+	Question question1 = new Question("What is the capital of France?", "A.Paris", "B.London", "C.Berlin", "D.Madrid");
+
+	Question question2 = new Question("Which planet is known as the Red Planet?", "A.Mars", "B.Venus", "C.Jupiter",
+			"D.Mercury");
+
+	Question question3 = new Question("Who wrote the play 'Romeo and Juliet'?", "A.William Shakespeare",
+			"B.Charles Dickens", "C.Jane Austen", "D.F. Scott Fitzgerald");
+
+	Question question4 = new Question("What is the chemical symbol for gold?", "A.Go", "B.Au", "C.Ag", "D.Gl");
+
+	Question question5 = new Question("In which year did Christopher Columbus discover America?", "A.1492", "B.1776",
+			"C.1620", "D.1812");
+	
+	Map<Question, Character> hmap=new HashMap<>();
+
+		
+			hmap.put(question1, 'A');
+			hmap.put(question2, 'C');
+			hmap.put(question3, 'D');
+			hmap.put(question4, 'A');
+			hmap.put(question5, 'B');
+			
+			
+			for(Map.Entry<Question, Character> qmap:hmap.entrySet()){
+				
+				System.out.println(qmap.getKey().getQuestion());
+				System.out.println(qmap.getKey().getOption1());
+				System.out.println(qmap.getKey().getOption2());
+				System.out.println(qmap.getKey().getOption2());
+				System.out.println(qmap.getKey().getOption4());
+
+					System.out.println("Enter your Answer : ");
+					Character ans = sc.next().charAt(0);
+					
+					int val = Character.compare(ans, qmap.getValue());
+					
+					if(val==0) {
+						System.out.println("Correct");
+						correctAnswers++;
+					}else {
+						System.out.println("Wrong Answer !!");
+						wrongAnswer++;
+					}
+					
+			}
+			double percentage=(100*correctAnswers)/hmap.size();
+			System.out.println();
+			System.out.println("***************Result*********************");
+			System.out.println("Total no of questions : "+hmap.size());
+			System.out.println("Correct Answered Questions : "+correctAnswers);
+			System.out.println("Wrong Answered Questions : "+wrongAnswer);
+			System.out.println("Percentage : "+percentage+"%");
+			
+			if(percentage>85 && percentage<100) {
+				System.out.println("Excellent ");
+			}else if(percentage>65 && percentage<85) {
+				System.out.println("Good ");
+			}else if(percentage>55 && percentage<65) {
+				System.out.println("Need improvement");
+			}else {
+				System.out.println("Reattempt the Quiz Again");
+			}		
+	}
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Pojo class:
+
+package Model;
+
+public class Question {
+
+	private String question;
+	private String option1;
+	private String option2;
+	private String option3;
+	private String option4;
+
+		public Question(){
+			
+		}
+
+		public String getQuestion() {
+			return question;
+		}
+
+		public void setQuestion(String question) {
+			this.question = question;
+		}
+
+		public String getOption1() {
+			return option1;
+		}
+
+		public void setOption1(String option1) {
+			this.option1 = option1;
+		}
+
+		public String getOption2() {
+			return option2;
+		}
+
+		public void setOption2(String option2) {
+			this.option2 = option2;
+		}
+
+		public String getOption3() {
+			return option3;
+		}
+
+		public void setOption3(String option3) {
+			this.option3 = option3;
+		}
+
+		public String getOption4() {
+			return option4;
+		}
+
+		public void setOption4(String option4) {
+			this.option4 = option4;
+		}
+
+		
+		public Question(String question, String option1, String option2, String option3, String option4) {
+			super();
+			this.question = question;
+			this.option1 = option1;
+			this.option2 = option2;
+			this.option3 = option3;
+			this.option4 = option4;
+		}
+
+		@Override
+		public String toString() {
+			return "Question [question=" + question + ", option1=" + option1 + ", option2=" + option2 + ", option3="
+					+ option3 + ", option4=" + option4 + "]";
+		}
+		
+		
+}
+
